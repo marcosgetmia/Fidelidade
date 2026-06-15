@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Definição
+## 1. Definição.
 
 **Uso indevido** é o uso do programa Azul Fidelidade fora da sua finalidade de reconhecimento e relacionamento, com o objetivo de **monetização por terceiros** — ou seja, transformar pontos, passagens e benefícios do programa em lucro financeiro fora das regras.
 
