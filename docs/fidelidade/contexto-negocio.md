@@ -1,155 +1,64 @@
-# Contexto de Negocio - Azul Fidelidade
+# Contexto de Negocio - Azul Fidelidade (Versao Consolidada)
 
-## Papel da unidade
+## Missao do programa
 
-Azul Fidelidade e a unidade de negocios responsavel pelo programa de vantagens da Azul Linhas Aereas.
+Garantir que os clientes da Azul aumentem seu engajamento na companhia por meio de frequencia de utilizacao, aumento de gastos, rentabilidade e LTV.
 
-O Fidelidade deve ser tratado como negocio, e nao como uma operacao de BI. O BI existe para traduzir estrategia, operacao, performance e alavancas de resultado da unidade, sempre com foco no que move receita, caixa, reconhecimento de clientes de alto valor e eficiencia operacional.
+## Motores principais de resultado
 
-## Tese economica central
+- Aumento de trechos voados no nivel Azul
+- Aumento de gastos na companhia no nivel Azul
+- Fluxo de caixa para a Azul com o Fidelidade como unidade de negocio
+- Receita incremental de assentos ociosos
+- Qualidade do preco medio diluido dos pontos acumulados
+- Breakage em faixa saudavel sem sinal de desengajamento
 
-O programa de fidelidade combina reconhecimento de clientes de alto valor com uma dinamica financeira de geracao antecipada de caixa. Parte relevante do caixa entra no momento do acumulo de pontos e da comercializacao de produtos do ecossistema, enquanto a prestacao economica e o reconhecimento de parte da receita acontecem posteriormente, no resgate ou na expiracao.
+## Prioridades estrategicas
 
-Essa dinamica torna centrais os temas de:
+1. Retencao e engajamento de clientes de alto valor
+2. Saude economica do programa
+3. Crescimento de receita com aumento de rentabilidade
+4. Confiabilidade e governanca de dados
+5. Performance comercial e de campanhas
+6. Fluxo de caixa antecipado e previsibilidade de faturamento
 
-- earn e burn
-- liability de acumulo e de resgate
-- saldo de passivo
-- breakage
-- forecast
-- coerencia entre receita, pontos, custo e reconhecimento contabil
+## Leituras essenciais
 
-## Base de clientes e tiers
+### Clientes
 
-- Mais de 20 milhoes de clientes cadastrados
-- Tiers atuais informados:
-- Azul Fidelidade (cadastro basico)
-- Azul Topazio
-- Azul Safira
-- Azul Diamante
-- Azul Diamante Unique
-- Azul One
+- Separar base cadastrada de base ativa e base de alto valor
+- Acompanhar mix de tiers e frequencia de transacoes
 
-## Produtos e frentes de negocio
+### Economia do programa
 
-### B2C
+- Controlar burn-earn em janela acumulada
+- Manter passivo em faixa segura
+- Tratar breakage como receita e, ao mesmo tempo, como sinal de valor percebido
+
+### Receita e caixa
+
+- Crescimento com qualidade de margem
+- Maior previsibilidade de entrada financeira
+
+## Produtos mais representativos
+
+### Acumulo
 
 - Buy Points
-- Renew
-- Transfer
+- Livelo
+- Esfera/Santander
+- AIC/Itau
 - Clube
-- MGM
-
-### B2B
-
-- AIC (cartao co-branded em parceria com Itau)
-- Campanhas com parceiros, bancos e varejo
 
 ### Resgate
 
-- Passagens aereas
-- Espaco Azul
-- Bagagem
-- Azul Pelo Mundo (APM)
+- Aereo Azul
+- Azul pelo Mundo
+- Azul Viagens
 - Shopping
-- Tarifa congelada
 
-## Bancos de dados principais
+## Benchmark e direcao competitiva
 
-### COMARCH
+Benchmark observado: Livelo, Smiles, LatamPass, Delta SkyMiles, AeroPlan e Flying Blue.
 
-Sistema principal de loyalty, com cadastro de clientes, contas, saldo, extrato, pontos e transacoes.
-
-Exemplos identificados em metadata:
-
-- RM.CST_ACCOUNTS
-- RM.CST_ACC_POINTS
-
-### AIC
-
-Base recebida do Itau com informacoes sobre clientes do cartao co-branded.
-
-Exemplos identificados em metadata:
-
-- AIC.TBCP_AIC
-
-### APM
-
-Base de passagens emitidas com pontos em outras companhias.
-
-Exemplos identificados em metadata:
-
-- APM.PNR
-- APM.FLIGHT
-- APM.PASSENGER_POINTS
-- APM.PASSENGER_POINTS_PLUS_MONEY
-
-### BRAVIUM
-
-Base do shopping.
-
-Exemplos identificados em metadata:
-
-- SHOPPING.TB_TAZUL_ORDER
-- SHOPPING.TB_TAZUL_ITEM_ORDER
-- SHOPPING.TB_TAZUL_PARTICIPANT
-
-### TAWS
-
-Camada de precificacao e integracao de resgate aereo com o ecossistema de reservas.
-
-Exemplos identificados em metadata:
-
-- DBO.ITINERARY_PRICE
-- DBO.ITINERARY_PRICE_DETAIL
-- DBO.ITINERARY_PRICE_POINTS
-- DBO.PRICING_RULE
-
-### TRUSTED_CRM
-
-Camada consolidada de negocio para fidelidade, com tratamento e aplicacao de regras.
-
-Exemplos identificados em metadata:
-
-- DBO.CADASTRAL
-- DBO.TRANSACIONAL
-
-### TRUSTED_FIDELIDADE
-
-Camada analtica ligada a custo marginal, transfer price, regras de valor e sustentacao de precificacao economica do resgate.
-
-Exemplos identificados em metadata:
-
-- TPAPP.TRANSFER_NAVITARE
-- TPAPP.TB_TP_LEG
-- TPAPP.TB_MARGINALSEATCOST
-
-## Relatorios e termos criticos do negocio
-
-- Liability acumulo
-- Liability resgate
-- Saldo do passivo
-- Faturas
-- Breakage
-- Aging
-- Forecast
-- Highlights
-
-## BI's citados como relevantes
-
-- Painel executivo de receitas
-- Gerencial faturamento B2B
-- Gerencial faturamento B2C
-- Perfil clientes
-- Campanhas B2B
-- Burn earn
-- Daily bookings
-
-## Premissas para BI de Fidelidade
-
-- O core do BI deve ser o negocio Fidelidade
-- Cada painel deve servir a uma decisao clara
-- O dado deve ser consistente entre paineis
-- Regras de negocio devem ser unicas e rastreaveis
-- Redundancias devem ser reduzidas de forma ativa
-- O nivel de detalhe deve variar por publico e objetivo
+Direcao estrategica: manter proposta premium, elevar valor percebido e personalizacao, sem copiar estrategias focadas apenas em volume e preco.

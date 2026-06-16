@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resumo Executivo Print | Fidelidade Intelligence</title>
+  <style>
+    :root {
+      --navy: #003087;
+      --blue: #005eb8;
+      --accent: #0096d6;
+      --ink: #1c2333;
+      --muted: #5a6375;
+      --line: #dde2ea;
+      --bg: #e8ecf1;
+      --paper: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .sheet {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 10mm auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      padding: 12mm;
+    }
+
+    .header {
+      background: linear-gradient(120deg, var(--navy), var(--blue));
+      color: #fff;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+    }
+
+    .header .kicker {
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 6px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .header p {
+      margin: 6px 0 0;
+      font-size: 12px;
+      color: #dbe9fb;
+      line-height: 1.4;
+    }
+
+    h2 {
+      margin: 12px 0 6px;
+      font-size: 14px;
+      color: var(--navy);
+      border-left: 4px solid var(--accent);
+      padding-left: 8px;
+    }
+
+    p, li {
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    p {
+      margin: 6px 0;
+    }
+
+    ul {
+      margin: 6px 0 6px 16px;
+      padding: 0;
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      background: #f9fbfe;
+    }
+
+    .card strong {
+      color: var(--navy);
+      font-size: 12px;
+    }
+
+    .table-wrap {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    th {
+      text-align: left;
+      background: var(--navy);
+      color: #fff;
+      padding: 6px;
+    }
+
+    td {
+      border-top: 1px solid var(--line);
+      padding: 6px;
+      vertical-align: top;
+      line-height: 1.35;
+    }
+
+    .footer {
+      margin-top: 10px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--line);
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    @media print {
+      body { background: #fff; }
+      .sheet {
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        width: auto;
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="header">
+      <div class="kicker">Fidelidade Intelligence | Resumo Executivo</div>
+      <h1>Azul Fidelidade - 1 Pagina de Direcionamento 2026</h1>
+      <p>Consolidacao das respostas de lideranca para estrategia, KPIs e governanca de BI.</p>
+    </header>
+
+    <h2>Missao</h2>
+    <p>Aumentar engajamento, gastos, rentabilidade e LTV dos clientes Azul com equilibrio economico do programa.</p>
+
+    <h2>Seis Prioridades</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Rank</th><th>Prioridade</th><th>Leitura executiva</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Engajamento de alto valor</td><td>Frequencia e valor por cliente</td></tr>
+          <tr><td>2</td><td>Saude economica do programa</td><td>Burn-Earn, passivo e breakage</td></tr>
+          <tr><td>3</td><td>Receita com rentabilidade</td><td>Crescimento com margem</td></tr>
+          <tr><td>4</td><td>Confiabilidade e governanca</td><td>Numero unico e acionavel</td></tr>
+          <tr><td>5</td><td>Performance comercial</td><td>Retorno por produto e campanha</td></tr>
+          <tr><td>6</td><td>Previsibilidade de caixa</td><td>Robustez de entrada financeira</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Top 10 KPIs</h2>
+    <p>Clientes ativos, frequencia de transacoes, faturamento, PMD, PME, receita, rentabilidade, custos, breakage e burn-earn.</p>
+
+    <div class="grid2">
+      <section class="card">
+        <strong>Regras Economicas</strong>
+        <ul>
+          <li>Burn x Earn referencia: 85%</li>
+          <li>Alerta se burn for maior que earn em 3 meses acumulados</li>
+          <li>Passivo maximo de 12 meses de resgates</li>
+          <li>Breakage alvo de 15% (+/- 5 p.p.)</li>
+        </ul>
+      </section>
+      <section class="card">
+        <strong>Fontes Priorizadas</strong>
+        <ul>
+          <li>Comarch</li>
+          <li>Mapa contabil</li>
+          <li>P&amp;L</li>
+          <li>DW_Azul Fidelidade</li>
+          <li>Gerenciais homologadas</li>
+        </ul>
+      </section>
+    </div>
+
+    <h2>Portfolio Prioritario</h2>
+    <p><strong>Acumulo:</strong> Buy Points, Livelo, Esfera/Santander, AIC/Itau e Clube.</p>
+    <p><strong>Resgate:</strong> Aereo Azul, Azul pelo Mundo, Azul Viagens e Shopping.</p>
+
+    <h2>Posicionamento</h2>
+    <p>Estrategia premium com foco em valor percebido e personalizacao, sem dependencia de crescimento por preco.</p>
+
+    <div class="footer">
+      <span>Fidelidade Intelligence</span>
+      <span>Print-ready A4</span>
+    </div>
+  </main>
+</body>
+</html>

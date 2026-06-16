@@ -1,0 +1,73 @@
+Contexto digitado 
+
+o Azul fidelidade é o programa de vantagens da Azul
+Tem um propósito forte em reconhecimento de clientes de alto valor e também de receita
+a combinação do programa como a característica da aviação proporciona uma geração de caixa antecipada de até 5 anos ao mais, isto porque o progrma de fidelide trabalha o acumulo de pontos que posteriormente vai ser usado no resgate de passagens para voar no futuro. Ou seja o dinheiro de acumulo de agora proveniente de compras de pontos transferências de pontos de bancos para azul pelos clientas e etc cria uma entrada de caixa agora que vai ser reconhecida só lá na frente.
+
+o fidelidade da azul tem mais de 20 milhões de clientes cadastrados, possui 5 categorias de tier, Azul Fidelidade (cadastro básico), azul topázio, azul safira, azul diamante, azul diamante unique, azul one.
+
+Trabalha com vários produtos
+EM B2C tem:
+- buypoints (venda de pontos)
+- renew ( renovação de pontos expirados)
+- transfer (tranferencia de pontos)
+- clube (assinatura para acumulo mensal de pontos)
+- mgm (menber get menber)
+
+
+B2B 
+- AIC (cartão de credito cobranded em parceria com o ITAU)
+- CAMPANHAS PARCEIROS, Bancos e Varejo
+
+Resgate
+- Espaço Azul (assentos mais espaçosos)
+- Bageagem (resgate a direito de transportar mais bagagem)
+- Passagem aeres
+- Azul pelo Mundo (APM) passagem aérea em coutras companhias aéreas
+- Shopping (produtos de comercio varejo para resgate em pontos)
+- Tarifa congelada (pagar para manter um preço em pontos)
+ 
+--------
+
+Bancos de dados
+
+Os principais bancos de dados são:
+- comarch (sistema clm da comarch principal sistema, tem o cadastro dos clientes e toda base de pontos, movimentação trasação saldo extrato)
+- aic (banco de dados com informações que o Itau manda sobre os clientes que possem o cartão cobranded
+- apm (banco de dados com informações das passagem emitidas compotos em outras companhias aéreas, esta transação é feita através de parceria com Ancoradou que usa o sistema amadeus)
+- bravium (banco de dados do sistema do shopping)
+- taws (sitema responsável pela precificação no resgate de passagens aéreas, este sistema é quem faz o papel de midware entere o sistema de reservas Navitaire e o sistema de loalty COMARCH, ele busca a passagem aplica as regras precifica entrega o valor e depois faz as transações de emissão da reserva e abatimento de pontos da conta dos clientes.
+- trusted_crm (banco de dados com tabelas consolidadas do negócio fidelidade já com algum tratamento e aplicação de regras de negócio as tabelas transacional e cadastral respondem a boa parte do negócio)
+- trusted_crm (possui tabelas de apoio ao calculo do custo marginal nas passagens aérias, assento por kilometro, é importante pois com este  dado é possível calcular tarifias exclusivas para os clientes fidelidade sem estar abaixo dos mínimos de custo e aproveitando a ociosidade para gerar valor para clientes)
+- 
+
+-- principais relatórios/termos
+
+liability acumulo - sumarização de todos os acúmulos de pontos cancelamentos de acúmulos correções e expirações
+liability resgate - sumarização de todos os resgates  cancelamentos e estornos
+saldo do passivo - valor total do saldo de pontos no sistema de todos os tempos (liquidez)
+faturas - extratos de valores de pontos que os parceiros (compra de pontos) irão pagar
+breakage - relatório de pontos acumulados e suas respectivas validades, utilizado para provisionamento da receita proveniente de expiração de pontos (o cliente transfere, o banco paga (ainda não reconhece receita), o cliente não usa e expira (reconhece receita). Como isto é a logo prazo, permite provisionamento e uso do valor como caixa no presenta, com conciliação para o futuro)
+aging - estrato de transações de acumulo
+forecast - previsão e acompanhamento de resultados
+highlights - acompanhamento de atingimento de metas
+
+
+-- principais BI's
+
+Gerencial Faturamento b2b - painel que traz os valores de receita gerada pela área em pontos provenientes de b2b em um nível de detalhes mais granular
+Painel executivo de receitas - tras sumarizado d-1 de valores de faturamento gerados por fidelidade como um todo todos os produdos que geram receita proveniente de pontos.
+Gerencial Faturamento B2C - valores de recita gerados pelos produtos b2c
+Perfil Clientes - dados consolidados de informações de clientes, contagem total distribuição por tier dados demográficos entre outros
+Campanhas B2b - detalhamento de performance de campanhas do B2b
+burn earn - acumolo resgate e relação entre acumulo e resgate
+dailybookings - painel de visualização da movimentação de resgate de passagens aéreas em pontos (fonte taws)
+
+
+
+
+
+
+
+
+

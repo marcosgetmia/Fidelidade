@@ -1,77 +1,49 @@
-# Diagnóstico do Portfólio Atual de BI — Azul Fidelidade v0.1
+# Principais Problemas Identificados - Versao Consolidada
 
-Com base na análise das quatro levas de painéis mapeados, é possível fazer uma primeira leitura estruturada do portfólio atual de BI do Azul Fidelidade.
+## Diagnostico sintese
 
-Os temas cobertos nas levas incluem:
+O principal gap atual nao e falta de informacao. O gap e falta de arquitetura unica de decisao, com foco economico e regras oficiais por indicador.
 
-- Performance Regional
-- Azul Pelo Mundo / APM
-- Campanhas B2B — performance geral
-- Burn to Earn
-- Liability
-- Acúmulo Aéreo Diário / Retroclaim
-- Daily Bookings / Jornadas e Pontos
-- Clube Azul Fidelidade — tabelas detalhadas
-- Cobranded / AIC
-- Painel de Clientes
-- Bancos Perfil Cliente
-- Cálculo CPP
+## Problemas estruturais
 
-A leitura preliminar é clara: existe muita riqueza analítica, mas o portfólio atual está organizado mais por demanda, tema ou necessidade pontual do que por uma arquitetura única de gestão do Fidelidade.
+### 1) Base cadastrada supervalorizada
 
-## Principais problemas identificados
+A leitura de clientes ainda privilegia volume de cadastro, com menor foco em base ativa e base economicamente relevante.
 
-### 1. Sobreposição forte de conteúdo
+### 2) Segmentacao incompleta de cliente
 
-Clientes, tiers, Clube, AIC, B2B, burn, earn e resgates aparecem em vários painéis com recortes semelhantes. A mesma métrica é apresentada com definições ou granularidades distintas dependendo do painel consultado.
+Ainda falta padrao robusto por perfil seller, transferidor, origem de parceiro e uso proprio/terceiro.
 
-### 2. Mistura de níveis decisórios no mesmo painel
+### 3) Modelo economico parcialmente operacionalizado
 
-Alguns painéis combinam visão executiva, gerencial, tática e transacional em uma mesma tela, sem hierarquia clara de informação. Isso dificulta tanto a leitura executiva quanto o uso operacional.
+Burn-earn, passivo e breakage estao definidos conceitualmente, mas sem padrao unico e recorrente em todas as camadas de BI.
 
-### 3. Painéis muito extensos
+### 4) Cobertura desigual de produtos e canais
 
-Há dashboards com muitas seções, tabelas, gráficos e filtros acumulados, o que prejudica a tomada de decisão rápida e aumenta o tempo de interpretação sem necessariamente agregar valor.
+Produtos relevantes foram mapeados, mas ainda com profundidade analitica desigual entre receita, margem e experiencia.
 
-### 4. Excesso de filtros e baixa hierarquia visual
+### 5) Risco de orientacao excessiva por volume
 
-Muitos painéis iniciam com uma camada pesada de filtros antes de responder à pergunta principal de negócio. A hierarquia visual não favorece a leitura por prioridade.
+Sem disciplina de valor e margem, o programa pode crescer em volume e perder eficiencia economica.
 
-### 5. Boas peças isoladas, mas sem arquitetura de portfólio
+### 6) Metas numericas incompletas por horizonte
 
-O painel executivo é um bom caminho; alguns guias de conceito também são positivos. O problema é que o conjunto ainda não opera como um sistema coeso — cada painel existe de forma independente, sem relação estruturada com os demais.
+Faltam metas trimestrais e anuais fechadas para parte dos indicadores criticos.
 
-### 6. Governança de conceitos ainda dispersa
+### 7) Governanca de dados fragmentada
 
-Existem guias para ciclo de vida, cadastros suspensos, conceitos de cliente e métricas, mas esses documentos precisam ser consolidados em um catálogo central oficial com definições únicas e rastreáveis.
+Confiabilidade foi priorizada estrategicamente, mas ainda depende de consolidacao final de regras e ownership.
 
-### 7. Falta de separação clara entre cockpit, análise e operação
+## Impacto no negocio
 
-Daily Bookings, Burn to Earn, Liability, B2B, Clube e Cobranded têm elementos de acompanhamento estratégico misturados com elementos de troubleshooting no mesmo ecossistema, sem separação de público ou propósito.
+- Tomada de decisao mais lenta
+- Menor comparabilidade entre frentes
+- Maior risco de conflito entre crescimento e saude economica
+- Menor previsibilidade de caixa no medio prazo
 
-## Organização proposta por domínio
+## Diretriz de correcao
 
-A partir dos painéis analisados, o diagnóstico pode ser organizado em 9 domínios:
-
-1. Executivo Fidelidade
-2. Receita e Faturamento
-3. B2B e Parceiros
-4. Clientes, Tiers e Ciclo de Vida
-5. Clube
-6. AIC / Cobranded
-7. Earn, Burn e Liability
-8. Resgates / Daily Bookings / APM / Interline
-9. Qualidade, Conceitos e Governança
-
-## Próximo passo recomendado
-
-Montar a matriz de racionalização dos painéis atuais, classificando cada um segundo os critérios:
-
-| Critério           | Descrição                                                        |
-| ------------------ | ---------------------------------------------------------------- |
-| Manter             | Painel com escopo claro, público definido e métrica certificada  |
-| Consolidar         | Painel redundante que pode ser absorvido por outro               |
-| Redesenhar         | Painel com conteúdo válido, mas estrutura ou foco inadequados    |
-| Arquivar           | Painel sem uso ativo ou substituído por outra solução            |
-| Substituir         | Painel que deve ser reconstruído sobre nova arquitetura de dados |
-| Certificar         | Painel prioritário que precisa de owner e governança formal      |
+- Definir scorecard executivo enxuto com indicadores oficiais
+- Separar camadas executiva, gerencial e operacional
+- Formalizar catalogo de metricas com owners
+- Certificar fontes prioritarias e reconciliacao recorrente
