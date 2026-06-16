@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fidelidade Intelligence + IA | Azul Fidelidade</title>
+  <style>
+    :root {
+      --navy: #003087;
+      --blue: #005eb8;
+      --accent: #0096d6;
+      --ink: #1c2333;
+      --muted: #5a6375;
+      --line: #dde2ea;
+      --soft: #f4f7fb;
+      --white: #fff;
+      --warn: #fff8e8;
+      --warn-border: #ffe0a8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      background: #e8ecf1;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── Slide shell ── */
+    .slide {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      position: relative;
+    }
+    .slide:nth-child(even) { background: #e2e8f2; }
+    .slide:nth-child(odd)  { background: #e8ecf1; }
+
+    .deck {
+      width: min(1100px, 96vw);
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(0,0,0,.10);
+    }
+
+    /* ── Slide header variants ── */
+    .s-head {
+      background: linear-gradient(130deg, var(--navy), var(--blue));
+      color: #fff;
+      padding: 22px 28px;
+    }
+    .s-head.light {
+      background: var(--soft);
+      border-bottom: 3px solid var(--accent);
+      color: var(--navy);
+    }
+    .s-head .kicker {
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      opacity: .8;
+      margin-bottom: 6px;
+    }
+    .s-head.light .kicker { color: var(--accent); opacity: 1; }
+    .s-head h1 { font-size: 30px; line-height: 1.15; }
+    .s-head h2 { font-size: 22px; line-height: 1.2; }
+    .s-head.light h2 { color: var(--navy); }
+    .s-head .sub {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #d0e4fa;
+      line-height: 1.5;
+    }
+    .s-head.light .sub { color: var(--muted); }
+    .s-head .tag {
+      display: inline-block;
+      margin-top: 12px;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+    }
+
+    /* ── Body ── */
+    .s-body { padding: 24px 28px 28px; }
+    .s-footer {
+      margin-top: 20px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--line);
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── Typography ── */
+    p, li { font-size: 14px; line-height: 1.65; }
+    p { margin: 8px 0; }
+    ul { margin: 10px 0 10px 20px; }
+    li { margin-bottom: 5px; }
+    strong { color: var(--navy); }
+    .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .msg {
+      font-size: 16px;
+      color: var(--navy);
+      font-weight: 600;
+      border-left: 4px solid var(--accent);
+      padding: 10px 14px;
+      background: var(--soft);
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0 0;
+      line-height: 1.4;
+    }
+
+    /* ── Section title ── */
+    .sec {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--accent);
+      font-weight: 700;
+      margin: 20px 0 10px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 4px;
+    }
+
+    /* ── Grids ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    @media (max-width: 780px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    }
+
+    /* ── Cards ── */
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--soft);
+      padding: 14px 16px;
+    }
+    .card.navy {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
+    .card.navy strong { color: #a8d0f5; }
+    .card.accent-top { border-top: 3px solid var(--accent); }
+    .card.navy-top   { border-top: 3px solid var(--navy); }
+    .card h3 { font-size: 15px; color: var(--navy); margin-bottom: 6px; }
+    .card.navy h3 { color: #a8d0f5; }
+    .card p, .card li { font-size: 13px; }
+
+    /* ── Pill badges ── */
+    .pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+    .pill-blue  { background: #dbeeff; color: var(--blue); }
+    .pill-green { background: #e3f5ea; color: #1a6b3a; }
+    .pill-warn  { background: var(--warn); color: #7a4a00; border: 1px solid var(--warn-border); }
+    .pill-navy  { background: var(--navy); color: #fff; }
+
+    /* ── Tables ── */
+    .tbl-wrap { border: 1px solid var(--line); border-radius: 9px; overflow: hidden; margin: 12px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { background: var(--navy); color: #fff; text-align: left; padding: 9px 10px; font-weight: 600; }
+    td { border-top: 1px solid var(--line); padding: 9px 10px; vertical-align: top; line-height: 1.5; }
+    tr:nth-child(even) td { background: #f9fbfe; }
+
+    /* ── Maturity journey ── */
+    .journey {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      overflow: hidden;
+      margin: 16px 0;
+    }
+    .j-step {
+      flex: 1;
+      padding: 14px 10px;
+      text-align: center;
+      border-right: 1px solid var(--line);
+      position: relative;
+    }
+    .j-step:last-child { border-right: none; }
+    .j-step .j-num {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .j-step .j-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+    .j-step .j-desc {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+    .j-step.active {
+      background: var(--navy);
+    }
+    .j-step.active .j-num   { color: #7ab5e0; }
+    .j-step.active .j-label { color: #fff; }
+    .j-step.active .j-desc  { color: #a8d0f5; }
+
+    /* ── Matrix ── */
+    .matrix-wrap { position: relative; padding: 12px 0; }
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+      min-height: 280px;
+    }
+    .m-quad {
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .m-quad.prime { background: #eaf9ee; border-color: #b0e0bc; }
+    .m-quad.build { background: #eaf4fd; border-color: #b0d0ef; }
+    .m-quad.study { background: #f9fbfe; }
+    .m-quad.later { background: #fafafa; }
+    .m-quad .q-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .m-quad.prime .q-title { color: #1a6b3a; }
+    .m-quad.build .q-title { color: var(--blue); }
+    .m-case {
+      font-size: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 5px 9px;
+      line-height: 1.4;
+    }
+    .m-quad.prime .m-case { border-color: #b0e0bc; }
+    .m-quad.build .m-case { border-color: #b0d0ef; }
+    .m-axis-y {
+      position: absolute;
+      left: -14px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .m-axis-x {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* ── Wave timeline ── */
+    .waves { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0; }
+    .wave {
+      border-radius: 9px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    .wave-head {
+      padding: 12px 14px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .wave:nth-child(1) .wave-head { background: #004fa3; }
+    .wave:nth-child(2) .wave-head { background: #005eb8; }
+    .wave:nth-child(3) .wave-head { background: var(--accent); }
+    .wave-body { padding: 12px 14px; background: var(--soft); }
+    .wave-body li { font-size: 12px; margin-bottom: 5px; }
+
+    /* ── Governance principles ── */
+    .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+    .principle {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 12px 14px;
+      background: var(--soft);
+    }
+    .principle .p-icon {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .principle .p-text { font-size: 13px; line-height: 1.5; }
+    .principle .p-text strong { display: block; font-size: 13px; color: var(--navy); margin-bottom: 2px; }
+
+    /* ── Cover slide specific ── */
+    .cover-body { padding: 36px 28px 32px; }
+    .cover-msg {
+      font-size: 19px;
+      color: var(--navy);
+      font-weight: 300;
+      line-height: 1.55;
+      border-left: 5px solid var(--accent);
+      padding-left: 16px;
+      margin: 24px 0;
+    }
+    .cover-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    /* ── Closing slide ── */
+    .closing-statement {
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--navy);
+      text-align: center;
+      padding: 20px 10px;
+      border-top: 3px solid var(--accent);
+      border-bottom: 3px solid var(--accent);
+      margin: 20px 0;
+    }
+    .closing-statement strong { font-weight: 700; display: block; font-size: 22px; margin-bottom: 6px; }
+
+    /* ── Slide number ── */
+    .slide-num {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ── Domain cards ── */
+    .domains { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .domain {
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 9px 9px 0;
+      padding: 11px 13px;
+      background: var(--soft);
+    }
+    .domain .d-name { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .domain .d-opp  { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+    /* ── Speaker notes ── */
+    .notes {
+      background: #fff8e8;
+      border: 1px dashed var(--warn-border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 16px;
+    }
+    .notes .n-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: #8a6020;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    .notes p, .notes li { font-size: 12px; color: #5f4520; line-height: 1.6; }
+
+    /* ── MVP diagram ── */
+    .mvp-flow { display: grid; grid-template-columns: 1fr 40px 1fr 40px 1fr; gap: 0; align-items: center; margin: 18px 0; }
+    .mvp-box {
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 14px;
+      background: var(--soft);
+      text-align: center;
+    }
+    .mvp-box.center-box { background: var(--navy); color: #fff; }
+    .mvp-box.center-box .b-title { color: #a8d0f5; }
+    .mvp-box .b-title { font-size: 11px; text-transform: uppercase; letter-spacing: .8px; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+    .mvp-box li { font-size: 12px; text-align: left; margin-bottom: 4px; }
+    .mvp-box.center-box li { color: #d0e8fb; }
+    .mvp-arrow { text-align: center; font-size: 22px; color: var(--accent); font-weight: 300; }
+
+    @media print {
+      body { background: #fff; }
+      .slide { min-height: 0; padding: 10px 8px; page-break-after: always; }
+      .deck { box-shadow: none; border: 1px solid #ccc; }
+      .notes { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 1 — TÍTULO
+══════════════════════════════════════════ -->
+<section class="slide">
+  <div class="deck" style="position:relative">
+    <span class="slide-num">01 / 12</span>
+    <header class="s-head" style="padding:36px 28px 32px">
+      <div class="kicker">Azul Fidelidade · Junho 2026</div>
+      <h1 style="font-size:36px;font-weight:300;line-height:1.1">
+        Fidelidade Intelligence<br/>
+        <strong style="font-weight:700;color:#a8d0f5">+ IA</strong>
+      </h1>
+      <div class="sub" style="font-size:16px;margin-top:12px;max-width:560px">
+        Da democratização da inteligência artificial à inteligência aplicada ao resultado do negócio
+      </div>
+      <div class="tag">Apresentação executiva · Fidelidade Intelligence</div>
+    </header>
+    <div class="cover-body">
+      <p class="cover-msg">
+        O time de Fidelidade não está apenas usando IA.<br/>
+        Está estruturando IA como uma nova camada de inteligência para transformar dados, métricas e conhecimento de negócio em <strong>decisão e resultado.</strong>
+      </p>
+      <div class="cover-meta">
+        <span class="pill pill-navy">Estratégia</span>
+        <span class="pill pill-blue">Resultado econômico</span>
+        <span class="pill pill-blue">Governança</span>
+        <span class="pill pill-blue">Execução em 90 dias</span>
+      </div>
+    </div>
+    <div class="s-body" style="padding-top:0">
+      <div class="notes">
+        <div class="n-label">Notas de fala</div>
+        <p>Esta apresentação nasce das respostas que a própria liderança deu sobre a visão do Fidelidade. Não é uma tese isolada. É a tradução da visão de vocês em uma proposta de uso estratégico de IA — com método, foco e plano de execução.</p>
+      </div>
+      <div class="s-footer"><span>Fidelidade Intelligence</span><span>01/12</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 2 — POR QUE AGORA
+══════════════════════════════════════════ -->
+<section class="slide">
+  <div class="deck" style="position:relative">
+    <span class="slide-num">02 / 12</span>
+    <header class="s-head light">
+      <div class="kicker">Contexto</div>
+      <h2>Por que este tema agora</h2>
+      <div class="sub">A democratização de IA abre oportunidade — e exige direção.</div>
+    </header>
+    <div class="s-body">
+      <div class="grid-3" style="margin-bottom:16px">
+        <div class="card accent-top">
+          <p class="label">O movimento</p>
+          <h3>Democratização em curso</h3>
+          <p>Ferramentas como Copilot e Claude estão sendo liberadas para toda a companhia. Isso é positivo e acelera a adoção.</p>
+        </div>
+        <div class="card accent-top">
+          <p class="label">O risco</p>
+          <h3>Ferramenta sem direção</h3>
+          <p>Liberar acesso é o primeiro passo. Sem método e foco, IA vira produtividade individual, não vantagem competitiva.</p>
+        </div>
+        <div class="card accent-top" style="border-top-color:var(--navy)">
+          <p class="label">A posição do Fidelidade</p>
+          <h3>Frente à curva</h3>
+          <p>O time já está estruturando uma abordagem orientada a resultado, governança e impacto econômico real.</p>
+        </div>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Nível</th><th>O que acontece</th><th>O que entregamos</th></tr></thead>
+          <tbody>
+            <tr><td>Uso livre de ferramentas</td><td>Ganho de produtividade individual</td><td>Relevante, mas não suficiente</td></tr>
+            <tr><td>IA orientada a processo</td><td>Automação de tarefas recorrentes</td><td>Eficiência operacional</td></tr>
+            <tr><td><strong>IA como inteligência de negócio</strong></td><td><strong>Decisão, previsão e geração de resultado</strong></td><td><strong>Impacto econômico mensurável</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="msg">Liberar ferramentas é o começo. Transformar IA em valor exige método, foco e governança.</div>
+
+      <div class="notes">
+        <div class="n-label">Notas de fala</div>
+        <p>Estamos completamente alinhados ao movimento de democratização que a Azul está promovendo. A proposta do Fidelidade é complementar: garantir que a IA, dentro do nosso escopo, esteja gerando valor de negócio, não apenas facilitando tarefas.</p>
+      </div>
+      <div class="s-footer"><span>Fidelidade Intelligence</span><span>02/12</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 3 — O QUE OUVIMOS DA LIDERANÇA
+══════════════════════════════════════════ -->
+<section class="slide">
+  <div class="deck" style="position:relative">
+    <span class="slide-num">03 / 12</span>
+    <header class="s-head">
+      <div class="kicker">Base da proposta · Formulário de liderança</div>
+      <h2>O que ouvimos da liderança</h2>
+      <div class="sub">A proposta nasce da visão de vocês — não de uma tese isolada.</div>
+    </header>
+    <div class="s-body">
+      <div class="grid-2">
+        <div>
+          <div class="sec">Missão</div>
+          <div class="card">
+            <p>Aumentar o <strong>engajamento dos clientes Azul</strong> por meio de frequência de utilização, aumento de gastos, rentabilidade e LTV.</p>
+          </div>
+
+          <div class="sec">Motores do negócio</div>
+          <ul>
+            <li>Trechos voados e gastos na companhia</li>
+            <li>Fluxo de caixa antecipado para a Azul</li>
+            <li>Receita incremental de assentos ociosos</li>
+            <li>Qualidade do PMD (preço médio diluído)</li>
+            <li>Breakage em faixa saudável</li>
+          </ul>
+        </div>
+        <div>
+          <div class="sec">Prioridades estratégicas — ranking da liderança</div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>#</th><th>Prioridade</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Retenção e engajamento de clientes de alto valor</td></tr>
+                <tr><td>2</td><td>Saúde econômica do programa</td></tr>
+                <tr><td>3</td><td>Crescimento de receita com rentabilidade</td></tr>
+                <tr><td>4</td><td>Confiabilidade e governança de dados</td></tr>
+                <tr><td>5</td><td>Performance comercial e de campanhas</td></tr>
+                <tr><td>6</td><td>Fluxo de caixa antecipado e previsibilidade</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="msg">Cada caso de uso de IA que propomos está diretamente conectado a uma dessas prioridades.</div>
+
+      <div class="notes">
+        <div class="n-label">Notas de fala</div>
+        <p>Quero reforçar um ponto: nada nesta apresentação foi inventado. As prioridades, os motores e a missão são exatamente o que vocês descreveram. Estamos usando a visão da liderança como fundação para a estrutura de IA que propomos.</p>
+      </div>
+      <div class="s-footer"><span>Fidelidade Intelligence</span><span>03/12</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 4 — LEITURA ESTRATÉGICA DO FIDELIDADE
+══════════════════════════════════════════ -->
+<section class="slide">
+  <div class="deck" style="position:relative">
+    <span class="slide-num">04 / 12</span>
+    <header class="s-head light">
+      <div class="kicker">Modelo econômico</div>
+      <h2>O Fidelidade como unidade econômica</h2>
+      <div class="sub">IA precisa atuar onde o negócio realmente gera valor.</div>
+    </header>
+    <div class="s-body">
+      <div class="grid-2">
+        <div>
+          <div class="sec">Fluxo econômico do programa</div>
+          <div class="card" style="margin-bottom:10px">
+            <p class="label">Acúmulo</p>
+            <p>Cliente acumula pontos → Azul recebe caixa antecipado → Passivo financeiro é registrado</p>
+          </div>
+          <div style="text-align:center;font-size:20px;color:var(--accent);margin:4px 0">↓</div>
+          <div class="card" style="margin-bottom:10px">
+            <p class="label">Gestão do passivo</p>
+            <p>Qualidade do PMD define custo do passivo → PME mede valor do resgate → Breakage reduz passivo com receita</p>
+          </div>
+          <div style="text-align:center;font-size:20px;color:var(--accent);margin:4px 0">↓</div>
+          <div class="card">
+            <p class="label">Resgate e resultado</p>
+            <p>Resgate monetiza assentos ociosos → Gera receita incremental → Cliente de alto valor aumenta LTV</p>
+          </div>
+        </div>
+        <div>
+          <div class="sec">Sinais de saúde econômica</div>
+          <div class="card accent-top" style="margin-bottom:10px">
+            <h3>Burn / Earn</h3>
+            <p>Referência: <strong>85%</strong><br/>Alerta: burn &gt; earn em janela acumulada de 3 meses ou no ano</p>
+          </div>
+          <div class="card accent-top" style="margin-bottom:10px">
+            <h3>Passivo controlado</h3>
+            <p>Teto: <strong>12 meses</strong> de resgates futuros projetados</p>
+          </div>
+          <div class="card accent-top" style="margin-bottom:10px">
+            <h3>Breakage saudável</h3>
+            <p>Alvo: <strong>15%</strong> com variação de ±5 p.p. Acima do teto: risco de desengajamento. Abaixo do piso: pressão sobre passivo.</p>
+          </div>
+          <div class="card" style="background:var(--warn);border-color:var(--warn-border)">
+            <p style="font-size:12px;color:#5f4520"><strong style="color:#7a4a00">Ponto de atenção:</strong> desvios nessas métricas não são óbvios nos dashboards atuais. É exatamente aqui que a IA entra.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="notes">
+        <div class="n-label">Notas de fala</div>
+        <p>O Fidelidade tem uma mecânica econômica sofisticada. A IA que propomos precisa entender essa mecânica — não apenas ler números, mas interpretar desvios, correlações e alertas dentro desse modelo.</p>
+      </div>
+      <div class="s-footer"><span>Fidelidade Intelligence</span><span>04/12</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 5 — O RISCO DE UMA IA NÍVEL 1
+══════════════════════════════════════════ -->
+<section class="slide">
+  <div class="deck" style="position:relative">
+    <span class="slide-num">05 / 12</span>
+    <header class="s-head">
+      <div class="kicker">Diagnóstico</div>
+      <h2>O risco de uma IA apenas nível 1</h2>
+      <div class="sub">Gera impacto rápido e visível — mas não necessariamente resultado sustentável.</div>
+    </header>
+    <div class="s-body">
+      <div class="grid-4" style="margin-bottom:18px">
+        <div class="card" style="border-top:3px solid #e0a020">
+          <p class="label" style="color:#8a6020">Nível 1A</p>
+          <h3>IA como prompt</h3>
+          <p>Uso pontual para redigir e-mails, resumir textos ou responder perguntas avulsas.</p>
+          <p style="margin-top:10px;font-size:12px;color:var(--muted)">Valor: individual. Escala: baixa.</p>
+        </div>
+        <div class="card" style="border-top:3px solid #e0a020">
+          <p class="label" style="color:#8a6020">Nível 1B</p>
+          <h3>IA como gerador de conteúdo</h3>
+          <p>Criação de apresentações, textos de campanhas e relatórios narrativos sem conexão com dados reais.</p>
+          <p style="margin-top:10px;font-size:12px;color:var(--muted)">Valor: estético. Impacto: incerto.</p>
+        </div>
+        <div class="card" style="border-top:3px solid #e0a020">
+          <p class="label" style="color:#8a6020">Nível 1C</p>
+          <h3>IA como protótipo isolado</h3>
+          <p>Experimentos sem conexão com os dados oficiais, as métricas de negócio ou os donos de processo.</p>
+          <p style="margin-top:10px;font-size:12px;color:var(--muted)">Valor: exploratório. Escala: zero.</p>
+        </div>
+        <div class="card" style="border-top:3px solid #e0a020">
+          <p class="label" style="color:#8a6020">Nível 1D</p>
+          <h3>IA como backlog infinito</h3>
+          <p>Lista crescente de ideias de IA sem critério de priorização, owner ou indicador de resultado.</p>
+          <p style="margin-top:10px;font-size:12px;color:var(--muted)">Valor: nenhum. Risco: distração.</p>
+        </div>
+      </div>
+
+      <div class="card" style="background:var(--warn);border:1px solid var(--warn-border);border-radius:9px;padding:14px 16px">
+        <p style="font-size:14px;color:#5f4520;margin:0"><strong style="color:#7a4a00">O padrão mais comum:</strong> times adotam IA com entusiasmo, produzem muito, medem pouco e não conseguem conectar o uso da ferramenta a um resultado de negócio específico. O Fidelidade tem a oportunidade de fazer diferente desde o início.</p>
+      </div>
+
+      <div class="msg">Não é sobre adotar IA. É sobre saber exatamente para qual problema de negócio ela está sendo aplicada.</div>
+
+      <div class="notes">
+        <div class="n-label">Notas de fala</div>
+        <p>Não estamos dizendo que o uso livre de IA é errado. Estamos dizendo que para o Fidelidade — com a complexidade econômica que tem — IA precisa de uma camada de direção estratégica para gerar resultado real.</p>
+      </div>
+      <div class="s-footer"><span>Fidelidade Intelligence</span><span>05/12</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 6 — A TESE MADURA
+══════════════════════════════════════════ -->
+<section class="slide">
+  <div class="deck" style="position:relative">
+    <span class="slide-num">06 / 12</span>
+    <header class="s-head light">
+      <div class="kicker">Posicionamento estratégico</div>
+      <h2>IA deve ser um sistema de decisão — não uma fábrica de conteúdo</h2>
+      <div class="sub">O time quer começar simples, com arquitetura para evoluir.</div>
+    </header>
+    <div class="s-body">
+      <div class="sec">Jornada de maturidade — onde queremos chegar</div>
+      <div class="journey">
+        <div class="j-step">
+          <div class="j-num">01</div>
+          <div class="j-label">Prompt</div>
+          <div class="j-desc">Perguntas avulsas, uso individual</div>
+        </div>
+        <div class="j-step">
+          <div class="j-num">02</div>
+          <div class="j-label">Assistente</div>
+          <div class="j-desc">Apoio a tarefas específicas</div>
+        </div>
+        <div class="j-step active">
+          <div class="j-num">03</div>
+          <div class="j-label">Copiloto de Processo</div>
+          <div class="j-desc">IA integrada ao fluxo de trabalho</div>
+        </div>
+        <div class="j-step active">
+          <div class="j-num">04</div>
+          <div class="j-label">Agente</div>
+          <div class="j-desc">Execução autônoma orientada a objetivo</div>
+        </div>
+        <div class="j-step">
+          <div class="j-num">05</div>
+          <div class="j-label">Modelo Decisório</div>
+          <div class="j-desc">IA na cadeia de decisão executiva</div>
+        </div>
+        <div class="j-step">
+          <div class="j-num">06</div>
+          <div class="j-label">Sistema Adaptativo</div>
+          <div class="j-desc">Aprendizado contínuo com o negócio</div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-top:4px">Etapas destacadas = foco dos primeiros 90 dias</p>
+
+      <div class="grid-2" style="margin-top:18px">
+        <div class="card navy">
+          <h3>O que NÃO queremos</h3>
+          <ul>
+            <li>IA que responde perguntas, mas não acessa dados reais do negócio</li>
+            <li>Outputs bonitos sem conexão com as métricas oficiais</li>
+            <li>Projetos de IA sem owner, sem métrica e sem prazo</li>
+            <li>Velocidade de prototipagem sem critério de resultado</li>
+          </ul>
+        </div>
+        <div class="card accent-top">
+          <h3>O que queremos construir</h3>
+          <ul>
+            <li>IA conectada às fontes oficiais: Comarch, DW, P&L, mapa contábil</li>
+            <li>Diagnósticos que a liderança consegue usar na semana seguinte</li>
+            <li>Casos com problema definido, indicador de impacto e dono</li>
+            <li>Evolução progressiva com cada ciclo de 30 dias entregando resultado</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="notes">
+        <div class="n-label">Notas de fala</div>
+        <p>Estamos propondo começar nas etapas 3 e 4 — não porque as anteriores não têm valor, mas porque o Fidelidade já tem maturidade analítica suficiente para ir além do uso básico desde o primeiro sprint.</p>
+      </div>
+      <div class="s-footer"><span>Fidelidade Intelligence</span><span>06/12</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 7 — ONDE A IA GERA VALOR
+══════════════════════════════════════════ -->
+<section class="slide">
+  <div class="deck" style="position:relative">
+    <span class="slide-num">07 / 12</span>
+    <header class="s-head">
+      <div class="kicker">Mapa de oportunidades</div>
+      <h2>Onde a IA gera valor no Fidelidade</h2>
+      <div class="sub">Nove domínios, cada um com uma oportunidade objetiva de aplicação.</div>
+    </header>
+    <div class="s-body">
+      <div class="domains">
+        <div class="domain">
+          <div class="d-name">Receita e Caixa</div>
+          <div class="d-opp">Leitura automática de desvios de faturamento, PMD e margem com explicação de causa.</div>
+        </div>
+        <div class="domain">
+          <div class="d-name">Clientes de Alto Valor</div>
+          <div class="d-opp">Segmentação dinâmica, propensão a churn e personalização de oferta por perfil.</div>
+        </div>
+        <div class="domain">
+          <div class="d-name">Earn, Burn e Passivo</div>
+          <div class="d-opp">Monitoramento contínuo dos sinais de saúde, alertas preditivos e leitura de tendência.</div>
+        </div>
+        <div class="domain">
+          <div class="d-name">Clube</div>
+          <div class="d-opp">Análise de comportamento de assinantes, propensão à renovação e impacto no LTV.</div>
+        </div>
+        <div class="domain">
+          <div class="d-name">AIC · Itaú</div>
+          <div class="d-opp">Performance do parceiro por safra, qualidade do acúmulo e análise de transferidores.</div>
+        </div>
+        <div class="domain">
+          <div class="d-name">Campanhas B2B</div>
+          <div class="d-opp">Priorização inteligente de campanhas por ROI esperado e perfil de parceiro.</div>
+        </div>
+        <div class="domain">
+          <div class="d-name">Resgates</div>
+          <div class="d-opp">Análise de mix de resgate, ocupação de assentos e impacto no passivo e no breakage.</div>
+        </div>
+        <div class="domain">
+          <div class="d-name">Rentabilidade e Precificação</div>
+          <div class="d-opp">Modelagem de PME, custo do passivo e sensibilidade de margem por produto.</div>
+        </div>
+        <div class="domain">
+          <div class="d-name">Governança de Dados</div>
+          <div class="d-opp">Detecção de anomalias, reconciliação de fontes e catálogo vivo de métricas oficiais.</div>
+        </div>
+      </div>
+
+      <div class="msg">Cada domínio tem problema real, dado disponível e resultado mensurável. Não é teoria.</div>
+
+      <div class="notes">
+        <div class="n-label">Notas de fala</div>
+        <p>Não queremos atacar os nove domínios ao mesmo tempo. Este mapa serve para mostrar a amplitude da oportunidade e justificar a priorização que apresentamos no próximo slide.</p>
+      </div>
+      <div class="s-footer"><span>Fidelidade Intelligence</span><span>07/12</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 8 — CASOS DE USO PRIORIZADOS
+══════════════════════════════════════════ -->
+<section class="slide">
+  <div class="deck" style="position:relative">
+    <span class="slide-num">08 / 12</span>
+    <header class="s-head light">
+      <div class="kicker">Priorização</div>
+      <h2>Casos de uso priorizados</h2>
+      <div class="sub">Matriz impacto × viabilidade — foco nos quadrantes de maior retorno imediato.</div>
+    </header>
+    <div class="s-body">
+      <div style="padding-left:28px;position:relative">
+        <div class="m-axis-y">↑ IMPACTO</div>
+        <div class="matrix-grid">
+          <div class="m-quad prime">
+            <div class="q-title">Alto impacto · Alta viabilidade</div>
+            <div class="m-case"><strong>1.</strong> Copiloto de Performance — leitura semanal de indicadores com diagnóstico narrativo</div>
+            <div class="m-case"><strong>2.</strong> Motor de explicação de desvios — receita, burn, earn e breakage</div>
+            <div class="m-case"><strong>4.</strong> Segmentação de clientes de alto valor e propensão</div>
+          </div>
+          <div class="m-quad build">
+            <div class="q-title">Alto impacto · Viabilidade média</div>
+            <div class="m-case"><strong>3.</strong> Priorização inteligente de campanhas e parceiros por ROI esperado</div>
+            <div class="m-case"><strong>5.</strong> Detecção de anomalias e inconsistências nas fontes de dados</div>
+          </div>
+          <div class="m-quad study">
+            <div class="q-title">Impacto médio · Alta viabilidade</div>
+            <div class="m-case"><strong>6.</strong> Apoio à governança de métricas e catálogo corporativo</div>
+          </div>
+          <div class="m-quad later">
+            <div class="q-title">Impacto médio · Viabilidade menor</div>
+            <div class="m-case" style="color:var(--muted)">Modelagem preditiva de churn e LTV — próxima onda</div>
+          </div>
+        </div>
+        <div class="m-axis-x">VIABILIDADE →</div>
+      </div>
+
+      <div class="msg" style="margin-top:16px">Os casos 1, 2 e 4 têm dados disponíveis hoje, problema definido e donos identificados. São o ponto de partida.</div>
+
+      <div class="notes">
+        <div class="n-label">Notas de fala</div>
+        <p>A priorização não é definitiva — é uma proposta. Mas o critério é claro: começamos onde o dado já existe, o problema já dói e o impacto é mensurável em até 90 dias.</p>
+      </div>
+      <div class="s-footer"><span>Fidelidade Intelligence</span><span>08/12</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 9 — PRIMEIRO RESULTADO PALPÁVEL (MVP)
+══════════════════════════════════════════ -->
+<section class="slide">
+  <div class="deck" style="position:relative">
+    <span class="slide-num">09 / 12</span>
+    <header class="s-head">
+      <div class="kicker">MVP · Primeiro entregável</div>
+      <h2>Copiloto de Performance do Fidelidade</h2>
+      <div class="sub">Diagnóstico executivo semanal gerado por IA — baseado nos indicadores oficiais do programa.</div>
+    </header>
+    <div class="s-body">
+      <div class="mvp-flow">
+        <div class="mvp-box">
+          <div class="b-title">Entradas</div>
+          <ul>
+            <li>Dashboards e bases gerenciais</li>
+            <li>KPIs oficiais do período</li>
+            <li>Mapa contábil e P&L</li>
+            <li>Regras de saúde (burn/earn, passivo, breakage)</li>
+            <li>Visão da liderança e benchmarks</li>
+          </ul>
+        </div>
+        <div class="mvp-arrow">→</div>
+        <div class="mvp-box center-box">
+          <div class="b-title">Copiloto de Performance</div>
+          <ul>
+            <li>Lê os indicadores do período</li>
+            <li>Identifica desvios vs meta e histórico</li>
+            <li>Explica possíveis causas</li>
+            <li>Aponta alavancas de correção</li>
+            <li>Gera narrativa executiva estruturada</li>
+          </ul>
+        </div>
+        <div class="mvp-arrow">→</div>
+        <div class="mvp-box">
+          <div class="b-title">Saída</div>
+          <ul>
+            <li>Diagnóstico semanal/mensal</li>
+            <li>Alertas de desvio com contexto</li>
+            <li>Sugestões de alavancas priorizadas</li>
+            <li>Narrativa para reuniões executivas</li>
+            <li>Histórico comparável ao longo do tempo</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:16px">
+        <div class="card" style="border-left:4px solid #1a6b3a;border-radius:0 9px 9px 0">
+          <p class="label" style="color:#1a6b3a">O que não é</p>
+          <p style="font-size:13px">Um relatório automático substituindo análise humana. É um <strong>ponto de partida qualificado</strong> para a conversa executiva.</p>
+        </div>
+        <div class="card" style="border-left:4px solid var(--accent);border-radius:0 9px 9px 0">
+          <p class="label">Prazo proposto</p>
+          <p style="font-size:13px">Versão funcional em <strong>30 dias</strong>. Validada com a liderança em 45 dias. Operacional em 60 dias.</p>
+        </div>
+        <div class="card" style="border-left:4px solid var(--navy);border-radius:0 9px 9px 0">
+          <p class="label">Como medir sucesso</p>
+          <p style="font-size:13px">Redução de tempo de preparação de reunião e qualidade da narrativa avaliada pela liderança no uso recorrente.</p>
+        </div>
+      </div>
+
+      <div class="notes">
+        <div class="n-label">Notas de fala</div>
+        <p>Este não é um protótipo de laboratório. É um produto mínimo viável com dado real, problema real e usuário real: a própria liderança desta sala. A validação de sucesso vem do uso — não da apresentação.</p>
+      </div>
+      <div class="s-footer"><span>Fidelidade Intelligence</span><span>09/12</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 10 — MODELO DE IMPLANTAÇÃO
+══════════════════════════════════════════ -->
+<section class="slide">
+  <div class="deck" style="position:relative">
+    <span class="slide-num">10 / 12</span>
+    <header class="s-head light">
+      <div class="kicker">Execução</div>
+      <h2>Modelo de implantação em 3 ondas</h2>
+      <div class="sub">Pragmatismo antes de ambição. Resultado antes de escala.</div>
+    </header>
+    <div class="s-body">
+      <div class="waves">
+        <div class="wave">
+          <div class="wave-head">Onda 1 · 0–30 dias<br/><span style="font-size:11px;font-weight:400;opacity:.85">Fundação</span></div>
+          <div class="wave-body">
+            <ul>
+              <li>Mapear casos de uso priorizados com donos</li>
+              <li>Inventariar fontes de dados disponíveis e qualidade</li>
+              <li>Definir KPIs oficiais e regras de negócio formalizadas</li>
+              <li>Estabelecer governança mínima: owner, métrica, critério de sucesso</li>
+              <li>Iniciar prototipagem do Copiloto de Performance</li>
+            </ul>
+          </div>
+        </div>
+        <div class="wave">
+          <div class="wave-head">Onda 2 · 31–60 dias<br/><span style="font-size:11px;font-weight:400;opacity:.85">MVPs e validação</span></div>
+          <div class="wave-body">
+            <ul>
+              <li>Entregar versão funcional do Copiloto de Performance</li>
+              <li>Validar outputs com a liderança em ciclo real</li>
+              <li>Iniciar motor de explicação de desvios</li>
+              <li>Conectar IA às fontes oficiais: Comarch, DW, P&L</li>
+              <li>Registrar primeiros aprendizados e ajustes de rota</li>
+            </ul>
+          </div>
+        </div>
+        <div class="wave">
+          <div class="wave-head">Onda 3 · 61–90 dias<br/><span style="font-size:11px;font-weight:400;opacity:.85">Industrialização</span></div>
+          <div class="wave-body">
+            <ul>
+              <li>Operacionalizar os MVPs validados em ritos recorrentes</li>
+              <li>Mensurar impacto e documentar ganhos</li>
+              <li>Expandir para segmentação e campanhas</li>
+              <li>Definir owners permanentes por domínio</li>
+              <li>Apresentar resultados e proposta de próxima fase</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="tbl-wrap" style="margin-top:14px">
+        <table>
+          <thead><tr><th>O que entregamos no final de cada onda</th><th>Onda 1</th><th>Onda 2</th><th>Onda 3</th></tr></thead>
+          <tbody>
+            <tr><td>Casos priorizados com owner e critério</td><td>✓</td><td>—</td><td>—</td></tr>
+            <tr><td>Copiloto de Performance funcionando</td><td>—</td><td>✓</td><td>—</td></tr>
+            <tr><td>Métricas de impacto dos MVPs</td><td>—</td><td>—</td><td>✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="notes">
+        <div class="n-label">Notas de fala</div>
+        <p>Cada onda tem um entregável concreto, não apenas atividades. Isso é o que diferencia uma agenda de inovação de um projeto de resultado.</p>
+      </div>
+      <div class="s-footer"><span>Fidelidade Intelligence</span><span>10/12</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 11 — GOVERNANÇA PARA ESCALAR
+══════════════════════════════════════════ -->
+<section class="slide">
+  <div class="deck" style="position:relative">
+    <span class="slide-num">11 / 12</span>
+    <header class="s-head">
+      <div class="kicker">Governança</div>
+      <h2>Escalar com segurança, não com velocidade cega</h2>
+      <div class="sub">Sete princípios que guiam o uso de IA dentro do Fidelidade.</div>
+    </header>
+    <div class="s-body">
+      <div class="principles">
+        <div class="principle">
+          <div class="p-icon">1</div>
+          <div class="p-text"><strong>Problema antes de solução</strong>Todo caso de IA começa com um problema de negócio definido — não com uma ideia de tecnologia.</div>
+        </div>
+        <div class="principle">
+          <div class="p-icon">2</div>
+          <div class="p-text"><strong>Indicador de impacto obrigatório</strong>Sem métrica de resultado, não há caso de uso. Toda iniciativa precisa de um número que muda.</div>
+        </div>
+        <div class="principle">
+          <div class="p-icon">3</div>
+          <div class="p-text"><strong>Validação humana em outputs críticos</strong>Nenhuma decisão de alto impacto é tomada com base apenas em output de IA sem revisão de um especialista.</div>
+        </div>
+        <div class="principle">
+          <div class="p-icon">4</div>
+          <div class="p-text"><strong>Métrica oficial ou nada</strong>IA só usa métricas com definição homologada. Isso evita proliferação de versões paralelas da realidade.</div>
+        </div>
+        <div class="principle">
+          <div class="p-icon">5</div>
+          <div class="p-text"><strong>Todo uso recorrente tem owner</strong>Se não tem dono, não escala. Cada caso operacionalizado precisa de um responsável pelo resultado.</div>
+        </div>
+        <div class="principle">
+          <div class="p-icon">6</div>
+          <div class="p-text"><strong>Protótipo não é produto</strong>A distância entre um demo e uma solução operacional é onde a maioria dos projetos de IA morre. Vamos percorrê-la.</div>
+        </div>
+        <div class="principle" style="grid-column: span 2">
+          <div class="p-icon" style="background:var(--accent)">7</div>
+          <div class="p-text"><strong>IA amplia decisão — não substitui governança</strong>O objetivo é dar mais capacidade analítica à liderança, não reduzir o papel do julgamento humano em decisões estratégicas e econômicas.</div>
+        </div>
+      </div>
+
+      <div class="notes">
+        <div class="n-label">Notas de fala</div>
+        <p>Esses princípios não são restrições. São o que vai garantir que a IA do Fidelidade gere credibilidade com a diretoria e não vire mais um projeto que não saiu do papel.</p>
+      </div>
+      <div class="s-footer"><span>Fidelidade Intelligence</span><span>11/12</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 12 — FECHAMENTO
+══════════════════════════════════════════ -->
+<section class="slide">
+  <div class="deck" style="position:relative">
+    <span class="slide-num">12 / 12</span>
+    <header class="s-head" style="padding:36px 28px 28px">
+      <div class="kicker">Azul Fidelidade · Fidelidade Intelligence + IA</div>
+      <h2 style="font-size:26px;font-weight:300;line-height:1.2">
+        O time de Fidelidade está estruturando IA<br/>
+        <strong style="font-weight:700;color:#a8d0f5">como uma nova camada de inteligência.</strong>
+      </h2>
+    </header>
+    <div class="s-body">
+      <div class="closing-statement">
+        <strong>Não apenas usando IA.</strong>
+        Transformando dados, métricas e conhecimento de negócio em decisão, governança e resultado econômico mensurável — com método, foco e execução em 90 dias.
+      </div>
+
+      <div class="sec">Pedido executivo</div>
+      <div class="grid-3">
+        <div class="card accent-top">
+          <p class="label">Aprovação 1</p>
+          <h3>Iniciar os MVPs priorizados</h3>
+          <p>Casos 1, 2 e 4 da matriz: Copiloto de Performance, motor de desvios e segmentação de alto valor.</p>
+        </div>
+        <div class="card accent-top">
+          <p class="label">Aprovação 2</p>
+          <h3>Governança mínima em vigor</h3>
+          <p>Formalização dos 7 princípios como critério interno para todo uso de IA no Fidelidade.</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--navy)">
+          <p class="label">Compromisso</p>
+          <h3>Resultados em 90 dias</h3>
+          <p>Apresentação de impacto ao final da Onda 3, com métricas, aprendizados e proposta de próxima fase.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px;background:var(--navy);color:#fff;border-radius:9px;padding:16px 18px">
+        <p style="font-size:14px;color:#d0e8fb;margin:0;line-height:1.6">
+          <strong style="color:#a8d0f5;display:block;font-size:15px;margin-bottom:6px">A pergunta não é se o Fidelidade vai usar IA.</strong>
+          A pergunta é se vai usar com visão estratégica, governança sólida e resultado mensurável — ou apenas como mais uma ferramenta no laptop.
+          <strong style="color:#fff;display:block;margin-top:8px">Estamos propostos a garantir que seja a primeira opção.</strong>
+        </p>
+      </div>
+
+      <div class="notes">
+        <div class="n-label">Notas de fala</div>
+        <p>Não estamos pedindo aprovação para estudar o tema. Estamos pedindo o sinal verde para executar. Temos a visão, temos o plano e temos a priorização. O que precisamos é do alinhamento de vocês para seguir com autonomia e entregar resultado em 90 dias.</p>
+      </div>
+      <div class="s-footer"><span>Fidelidade Intelligence</span><span>12/12 · Junho 2026</span></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
