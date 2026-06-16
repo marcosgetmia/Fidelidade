@@ -7,6 +7,7 @@ import AICView        from '@/views/AICView'
 import EarnBurnView   from '@/views/EarnBurnView'
 import ResgatesView   from '@/views/ResgatesView'
 import GovernancaView from '@/views/GovernancaView'
+import CopilotoView   from '@/views/CopilotoView'
 
 const VIEWS: Record<string, React.FC> = {
   executivo:  ExecutivoView,
@@ -18,6 +19,7 @@ const VIEWS: Record<string, React.FC> = {
   'earn-burn':EarnBurnView,
   resgates:   ResgatesView,
   governanca: GovernancaView,
+  copiloto:   CopilotoView,
 }
 
 export default function DomainPage({ params }: { params: { domain: string } }) {

@@ -6,7 +6,8 @@ const NAV = [
   {
     group: 'Principal',
     items: [
-      { href: '/executivo',  icon: '📊', label: 'Painel Executivo',      sub: 'Executive Scorecard' },
+      { href: '/executivo',  icon: '📊', label: 'Painel Executivo',        sub: 'Executive Scorecard' },
+      { href: '/copiloto',   icon: '✦',  label: 'Copiloto de Performance', sub: 'Diagnóstico · Desvios · Alavancas' },
     ],
   },
   {
